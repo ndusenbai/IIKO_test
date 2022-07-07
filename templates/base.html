@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>testApp</title>{% endblock title %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
+    <link rel="stylesheet" href="{% static '/css/testAppTemplat/style.css' %}">
+    {% block style %}{% endblock style %}
+</head>
+
+<body>
+
+    <div class="header">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md ">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+                <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+
+                        {% if user.is_authenticated %}
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Dropdown
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="#">Profil</a>
+                                  <a class="dropdown-item" href="{% url 'api' %}">API</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="{% url 'addMember' %}">Add employee</a>
+                                </div>
+                            </li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
+
+                        {% else %}
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'login' %}">Log In</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'register' %}">Sign Up</a></li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    {% block sidebar %}<!-- insert default navigation text for every page -->{% endblock %}
+
+    {% block content %}<!-- default content text (typically empty) -->{% endblock %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
